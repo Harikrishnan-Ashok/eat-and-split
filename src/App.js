@@ -35,7 +35,7 @@ export default function App() {
           ></FormAddFriend>
         )}
         <Button onClick={() => setAddFriend(!showAddFriend)}>
-          {showAddFriend ? "Done" : "Add New Friend"}
+          {showAddFriend ? "Close ❌" : "Add New Friend"}
         </Button>
       </div>
       <FormSplitBill></FormSplitBill>
