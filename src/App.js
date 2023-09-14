@@ -33,7 +33,6 @@ export default function App() {
             friends={friends}
             setfriends={setfriends}
             setAddFriend={setAddFriend}
-            showAddFriend={showAddFriend}
           ></FormAddFriend>
         )}
         <Button onClick={() => setAddFriend(!showAddFriend)}>
@@ -88,7 +87,7 @@ function Button({ children, onClick }) {
   );
 }
 
-function FormAddFriend({ setfriends, setAddFriend, showAddFriend }) {
+function FormAddFriend({ setfriends, setAddFriend }) {
   const [name, setName] = useState("");
   const [image, setImage] = useState("https://i.pravatar.cc/48");
 
@@ -108,7 +107,7 @@ function FormAddFriend({ setfriends, setAddFriend, showAddFriend }) {
     setfriends((curr) => [...curr, newFriend]);
     setImage("https://i.pravatar.cc/48");
     setName("");
-    setAddFriend(!showAddFriend);
+    setAddFriend(false);
   }
 
   return (
