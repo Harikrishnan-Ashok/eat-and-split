@@ -89,9 +89,6 @@ function Button({ children, onClick }) {
 function FormAddFriend({ setfriends }) {
   const [name, setName] = useState("");
   const [image, setImage] = useState("https://i.pravatar.cc/48");
-  function handlesetfriend(xdxd) {
-    setfriends((curr) => [...curr, xdxd]);
-  }
 
   function handleAddFriend(e) {
     e.preventDefault();
@@ -106,7 +103,7 @@ function FormAddFriend({ setfriends }) {
       balance: 0,
       id,
     };
-    handlesetfriend(newFriend);
+    setfriends((curr) => [...curr, newFriend]);
     setImage("https://i.pravatar.cc/48");
     setName("");
   }
