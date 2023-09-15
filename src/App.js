@@ -27,7 +27,8 @@ export default function App() {
   const [showAddFriend, setAddFriend] = useState(false);
 
   function handleSetFriend(friend) {
-    setselectedFriend(friend);
+    setselectedFriend((curr) => (curr?.id === friend.id ? null : friend));
+    setAddFriend(false);
   }
   return (
     <div className="app">
@@ -71,7 +72,7 @@ function FriendList({ friends, handleSetFriend, selectedFriend }) {
 }
 
 function Friend({ friend, handleSetFriend, selectedFriend }) {
-  const isSelected = selectedFriend && selectedFriend.id === friend.id; // Check if selectedFriend is not null
+  const isSelected = selectedFriend?.id === friend.id; // Check if selectedFriend is not null
   return (
     <li className={isSelected ? "selected" : ""}>
       <img src={friend.image} alt={friend.name}></img>
@@ -90,7 +91,9 @@ function Friend({ friend, handleSetFriend, selectedFriend }) {
       {friend.balance === 0 && (
         <p className="">you and {friend.name} are even</p>
       )}
-      <Button onClick={() => handleSetFriend(friend)}>Select</Button>
+      <Button onClick={() => handleSetFriend(friend)}>
+        {isSelected ? "close" : "select"}
+      </Button>
     </li>
   );
 }
