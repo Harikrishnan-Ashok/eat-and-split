@@ -35,6 +35,7 @@ export default function App() {
         <FriendList
           friends={friends}
           handleSetFriend={handleSetFriend}
+          selectedFriend={selectedFriend}
         ></FriendList>
         {showAddFriend && (
           <FormAddFriend
@@ -54,7 +55,7 @@ export default function App() {
   );
 }
 
-function FriendList({ friends, handleSetFriend }) {
+function FriendList({ friends, handleSetFriend, selectedFriend }) {
   return (
     <ul>
       {friends.map((friend) => (
@@ -62,15 +63,17 @@ function FriendList({ friends, handleSetFriend }) {
           friend={friend}
           key={friend.id}
           handleSetFriend={handleSetFriend}
+          selectedFriend={selectedFriend}
         ></Friend>
       ))}
     </ul>
   );
 }
 
-function Friend({ friend, handleSetFriend }) {
+function Friend({ friend, handleSetFriend, selectedFriend }) {
+  const isSelected = selectedFriend && selectedFriend.id === friend.id; // Check if selectedFriend is not null
   return (
-    <li>
+    <li className={isSelected ? "selected" : ""}>
       <img src={friend.image} alt={friend.name}></img>
       <h3>{friend.name}</h3>
 
@@ -91,6 +94,7 @@ function Friend({ friend, handleSetFriend }) {
     </li>
   );
 }
+
 function Button({ children, onClick }) {
   return (
     <>
@@ -156,7 +160,7 @@ function FormSplitBill({ selectedFriend }) {
       <label>🤑Who paid ? :</label>
       <select>
         <option value="user">you</option>
-        <option value="friend"> {selectedFriend.name} </option>
+        <option value="friend"> {selectedFriend.id} </option>
       </select>
       <Button>Split the Bill</Button>
     </form>
